@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  background-color: rgb(244, 244, 244);
+  color: black;
+}
+
+.contendor-maximo {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-grid {
+  padding: 50px 0px;
+}
+
+.section-grid > .titulo {
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 20px;
+}
+
+.section-grid > .products-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
