@@ -1,52 +1,23 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "../styles/ItemListContainer.css"
+import ItemList from "./ItemList"
+import { getProducs } from "../mock/asyncData"
 
-function ItemListContainer() {
-  const [cantidad, setCantidad] = useState(1)
+function ItemListContainer(props) {
+  const [data, setData] = useState([])
 
-  function agregarProducto() {
-    setCantidad(cantidad + 1)
-  }
-
-  function quitarProducto() {
-    if (cantidad > 1) {
-      setCantidad(cantidad - 1)
-    }
-  }
+  useEffect(() => {
+    getProducs()
+      .then((res) => setData(res))
+      .catch((error) => console.error(error))
+  }, [])
 
   return (
-    <article className="product-card">
-      <figure>
-        <img
-          src="https://www.cacaushow.com.br/on/demandware.static/-/Sites-masterCatalog_CacauShow/default/dw1b8ac003/medium/1002639_1.png"
-          alt="Descripción clara del producto"
-          loading="lazy"
-        />
-      </figure>
+    <section className="section-grid contendor-maximo">
+      <h2 className="titulo">{props.tituloSection}</h2>
 
-      <div className="product-content">
-        <header>
-          {/* <span className="category">Categoría</span> */}
-          <h2 className="product-title">Bon o bon de Marajucá 30g</h2>
-        </header>
-
-        <div className="price-container">
-          <span className="price">$1000</span>
-
-          <div>
-            <button onClick={quitarProducto}>-</button>
-            <span>{cantidad}</span>
-            <button onClick={agregarProducto}>+</button>
-          </div>
-        </div>
-      </div>
-
-      <footer>
-        <button type="button" className="btn-add">
-          Añadir al carrito
-        </button>
-      </footer>
-    </article>
+        <ItemList data={data} />
+    </section>
   )
 }
 

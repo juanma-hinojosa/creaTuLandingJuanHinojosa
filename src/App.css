@@ -14,19 +14,3 @@ main {
   margin: 0 auto;
 }
 
-.section-grid {
-  padding: 50px 0px;
-}
-
-.section-grid > .titulo {
-  font-weight: 600;
-  letter-spacing: 2px;
-  font-family: 'Times New Roman', Times, serif;
-  margin-bottom: 20px;
-}
-
-.section-grid > .products-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 20px;
-}
