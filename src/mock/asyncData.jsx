@@ -34,6 +34,24 @@ const productos = [
     price: 200,
     category: 'limited edition',
     img: "https://www.cacaushow.com.br/on/demandware.static/-/Sites-masterCatalog_CacauShow/default/dw1b8ac003/medium/1002639_1.png"
+  },
+  {
+    id: "05",
+    name: "Trufa Mezzo 13,5g",
+    description: 'Ovo de pascoa tematico da Harry potter',
+    stock: 2,
+    price: 200,
+    category: 'limited edition',
+    img: "https://www.cacaushow.com.br/on/demandware.static/-/Sites-masterCatalog_CacauShow/default/dwa8f754a0/medium/1003608_1.png"
+  },
+  {
+    id: "06",
+    name: "Trufa de Chocolate de Leche y Pistacho 30g",
+    description: 'Ovo de pascoa tematico da Harry potter',
+    stock: 10,
+    price: 70,
+    category: 'limited edition',
+    img: "https://www.cacaushow.com.br/on/demandware.static/-/Sites-masterCatalog_CacauShow/default/dw1787ca6b/medium/1003394_1.png"
   }
 ]
 

@@ -2,7 +2,8 @@ function CardComponent({img}) {
   return (
     <article
       style={{
-        border: "4px"
+        border: "4px",
+        overflow: 'hidden'
       }}
     >
       <img
