@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import { Children, useEffect, useState } from "react"
 import "../styles/ItemListContainer.css"
 import ItemList from "./ItemList"
 import { getProducs } from "../mock/asyncData"
 
-function ItemListContainer(props) {
+function ItemListContainer({tituloSection, children}) {
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -14,9 +14,10 @@ function ItemListContainer(props) {
 
   return (
     <section className="section-grid contendor-maximo">
-      <h2 className="titulo">{props.tituloSection}</h2>
+      <h2 className="titulo">{tituloSection}</h2>
 
-        <ItemList data={data} />
+        {/* <ItemList data={data} /> */}
+        {children}
     </section>
   )
 }

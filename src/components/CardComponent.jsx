@@ -1,4 +1,4 @@
-function CardComponent(props) {
+function CardComponent({img}) {
   return (
     <article
       style={{
@@ -9,7 +9,7 @@ function CardComponent(props) {
         style={{
           width: "100%"
         }}
-        src={props.img} alt="producto linea de clasicos" />
+        src={img.img} alt="producto linea de clasicos" />
     </article>
   )
 }

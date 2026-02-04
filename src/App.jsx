@@ -1,10 +1,22 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import CardComponent from './components/CardComponent'
 import ImageSwiper from './components/CaruselSection'
+import ItemList from './components/ItemList'
 import ItemListContainer from './components/ItemListContainer'
 import NavbarComponent from './components/NavbarComponent'
+import { flyersCarrusel, flyersCarruselAvisos } from './mock/asyncDataCarrusel'
+import { getProducs } from './mock/asyncData'
+import ImgList from './components/ItemImgList'
 
 function App() {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    getProducs()
+      .then(res => setData(res))
+      .catch(console.error)
+  }, [])
   return (
     <>
       <header>
@@ -13,58 +25,29 @@ function App() {
 
       <main>
 
-        <ImageSwiper />
+        <ImageSwiper data={flyersCarrusel} />
 
         <ItemListContainer
           tituloSection="Especiales"
-        />
+        >
+          <ItemList data={data} />
+        </ItemListContainer>
 
 
-        <section className="section-grid contendor-maximo">
-          <h2 className="titulo">Linea de Clasicos</h2>
+        <ItemListContainer tituloSection="Linea de Clasicos">
           <h5>Rafaela</h5>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr 1fr",
-              gap: "20px"
-            }}
-          >
+          <ImgList />
+        </ItemListContainer>
 
-
-            <CardComponent
-              img="https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dw4189b8dc/Home/Linhas/banner_1080x1500_nossas-linhas_lacreme.png"
-            />
-            <CardComponent
-              img="https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dwa816b1e6/Home/Linhas/banner_1080x1500_nossas-linhas_especiais.png"
-
-            />
-            <CardComponent
-              img="https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dwa8c661f8/Home/Linhas/banner_1080x1500_nossas-linhas_dreams.png"
-
-            />
-            <CardComponent
-              img="https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dw03b437a0/Home/Linhas/banner_1080x1500_nossas-linhas_lanut.png"
-
-            />
-          </div>
-        </section>
-
-        <ItemListContainer
+         <ItemListContainer
           tituloSection="Todos los Momentos van de la mano con Cacau Show"
-        />
+        >
+          <ItemList data={data} />
+        </ItemListContainer>
 
 
-        {/* <section className="section-grid contendor-maximo">
-          <img
-            style={{
-              width: "100%"
-            }}
-            src="https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dwa2fb163a/Home/Banner-Carrossel/1264x530_ursinhos.png" alt="Lo que mas le gusta a Rafa despues de Harry Potter" />
-        </section> */}
-
-        <ImageSwiper />
+        <ImageSwiper data={flyersCarruselAvisos} />
       </main>
     </>
   )

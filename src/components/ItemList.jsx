@@ -6,10 +6,6 @@ function ItemList({data}) {
     <div className="products-container">
 
       {data.map((prod) => <ItemComponent key={prod.id}  prod={prod} /> )}
-      {/* <ItemComponent /> */}
-      {/* <ItemComponent /> */}
-      {/* <ItemComponent /> */}
-      {/* <ItemComponent /> */}
     </div>
   )
 }

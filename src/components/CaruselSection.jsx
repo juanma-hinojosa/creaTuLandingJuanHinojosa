@@ -5,18 +5,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-function ImageSwiper() {
-  const images = [
-    'https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dw230596d4/Home/Banner-Carrossel/1264x530_ajustado_harry.png',
-    'https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dwb04dac0e/Home/Banner-Carrossel/1264x530_Ajustado-_sonic.png',
-    'https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dwd7c05fef/Home/Banner-Carrossel/1264x530_ajustado-infantil_batman.png',
-    'https://www.cacaushow.com.br/dw/image/v2/BFJD_PRD/on/demandware.static/-/Sites-CacauShow-Library/default/dwa4535ce0/Home/Banner-Carrossel/1264x530_biscoiteria.png',
-  ];
-
+function ImageSwiper({ data}) {
   return (
-    <section 
-      className='section-grid contendor-maximo'
-    >
+    <section className="section-grid contendor-maximo">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
@@ -26,19 +17,19 @@ function ImageSwiper() {
         slidesPerView={1}
         autoplay={true}
       >
-        {images.map((img, index) => (
+        {data.map((item, index) => (
           <SwiperSlide key={index}>
             <img
-              src={img}
+              src={item.img}
               alt={`slide-${index}`}
-              style={{ width: '100%', borderRadius: '10px' }}
+              style={{ width: "100%", borderRadius: "10px" }}
             />
           </SwiperSlide>
         ))}
       </Swiper>
     </section>
-
   );
 }
+
 
 export default ImageSwiper

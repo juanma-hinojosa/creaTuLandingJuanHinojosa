@@ -14,3 +14,16 @@ main {
   margin: 0 auto;
 }
 
+.mobile {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .section-grid > .products-container.desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+}
