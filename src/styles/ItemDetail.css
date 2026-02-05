@@ -1,0 +1,65 @@
+.item-detail>h2 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2rem;
+}
+
+.item-detail>.price-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+
+}
+
+.item-detail>.price-container>.price {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-right: 40px;
+}
+
+.item-detail>.price-container>div {
+  border-radius: 4px;
+  border: 1px solid rgb(199, 199, 199);
+  width: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.item-detail>.price-container>div>span {
+  text-align: center;
+}
+
+
+.item-detail>footer {
+  width: 400px;
+  background-color: rgb(45, 138, 45);
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.item-detail>footer>.btn-add {
+  background: transparent;
+  border: none;
+  font-size: .8rem;
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .item-detail>.price-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+  .item-detail>figcaption>img {
+    width: 50%;
+  }
+
+  .item-detail>footer {
+    width: 100%;
+  }
+
+}

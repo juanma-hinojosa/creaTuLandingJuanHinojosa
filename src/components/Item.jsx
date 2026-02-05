@@ -28,7 +28,7 @@ function ItemComponent({ prod }) {
       <figure>
         <img
           src={prod.img}
-          alt="Descripción clara del producto"
+          alt={`Descripcion ${prod.name}`}
           loading="lazy"
         />
       </figure>

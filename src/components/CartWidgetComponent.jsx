@@ -7,6 +7,7 @@ function CartWidget() {
         style={{
           fontSize:"1.5rem"
         }}
+        className="cart"
       >
 
         <Icon icon="lineicons:cart-1" width="24" height="24" />

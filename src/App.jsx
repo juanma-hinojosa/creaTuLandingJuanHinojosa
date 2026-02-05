@@ -9,6 +9,7 @@ import { getProducs } from './mock/asyncData'
 import ImgList from './components/ItemImgList'
 import ItemImg from './components/Img'
 import ItemComponent from './components/Item'
+import ItemDetailContainer from './components/ItemDetailContainer'
 
 function App() {
   const [data, setData] = useState([])
@@ -57,6 +58,8 @@ function App() {
 
 
         <ImageSwiper data={flyersCarruselAvisos} />
+
+        <ItemDetailContainer />
       </main>
     </>
   )

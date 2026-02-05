@@ -4,7 +4,7 @@ nav {
 }
 
 .max-width-container {
- max-width: 1280px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -69,4 +69,18 @@ nav {
 .max-width-container>.links-container>.link>a:hover {
   background-color: gainsboro;
   color: black;
+}
+
+@media (max-width: 600px) {
+  .max-width-container>.topbar>.features-container {
+    display: none;
+  }
+  .max-width-container>.topbar {
+   display: flex;
+   justify-content: center;
+  }
+
+  .max-width-container>.links-container {
+    display: none;
+  }
 }
