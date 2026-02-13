@@ -1,5 +1,8 @@
 import { useState } from "react"
 import "../styles/Item.css"
+import { Link } from "react-router-dom"
+import { toast } from "react-toastify";
+
 
 function ItemComponent({ prod }) {
   const [cantidad, setCantidad] = useState(1)
@@ -16,11 +19,12 @@ function ItemComponent({ prod }) {
       setCantidad(cantidad - 1)
     }
   }
-
-  const shop = () => {
-    setComprar(!comprar)
+  
+  const onAdd = (cantidad) => {
+    toast.success(
+      `Agregaste ${cantidad} unidades de ${prod.name} al carrito 🛒`
+    )
   }
-
 
 
   return (
@@ -36,7 +40,11 @@ function ItemComponent({ prod }) {
       <div className="product-content">
         <header>
           {/* <span className="category">Categoría</span> */}
-          <h2 className="product-title">{prod.name}</h2>
+          <h2 className="product-title">
+            <Link to={`/item/${prod.id}`} className="product-title" style={{ textDecoration: 'none', color: '#141414' }}>
+              {prod.name}
+            </Link>
+          </h2>
         </header>
 
 
@@ -72,7 +80,8 @@ function ItemComponent({ prod }) {
       </div>
 
       <footer>
-        <button type="button" onClick={shop} disabled={prod.stock === 0} className="btn-add">
+        <button type="button" onClick={() => onAdd(cantidad)}
+          disabled={prod.stock === 0} className="btn-add" style={{ cursor: 'pointer' }}>
           {prod.stock === 0 ? "Sin stock" : "Añadir al carrito"}
         </button>
       </footer>

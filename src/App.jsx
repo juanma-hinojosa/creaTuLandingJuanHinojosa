@@ -1,67 +1,27 @@
-import { useEffect, useState } from 'react'
 import './App.css'
-import ImageSwiper from './components/CaruselSection'
-import ItemList from './components/ItemList'
-import ItemListContainer from './components/ItemListContainer'
 import NavbarComponent from './components/NavbarComponent'
-import { flyersCarrusel, flyersCarruselAvisos, listaMomentosDulces } from './mock/asyncDataCarrusel'
-import { getProducs } from './mock/asyncData'
-import ImgList from './components/ItemImgList'
-import ItemImg from './components/Img'
-import ItemComponent from './components/Item'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import Error from './components/Error'
 import ItemDetailContainer from './components/ItemDetailContainer'
+import ItemListContainer from './components/ItemListContainer'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    getProducs()
-      .then(res => setData(res))
-      .catch(console.error)
-  }, [])
   return (
-    <>
-      <header>
-        <NavbarComponent />
-      </header>
+    <BrowserRouter>
+      <ToastContainer position="top-right" autoClose={2000} />
+      <NavbarComponent />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/item/:id' element={<ItemDetailContainer />} />
 
-      <main>
+        <Route path='/category/:type' element={<ItemListContainer />} />
 
-        <ImageSwiper data={flyersCarrusel} />
-
-        <ItemListContainer
-          tituloSection="Especiales"
-        >
-          <ItemList data={data} />
-        </ItemListContainer>
-
-
-        <ItemListContainer tituloSection='Todos los Momentos Combinan con Cacau Show' >
-          <h5>Momentos Dulces con Rafaela</h5>
-
-          <div className="products-container">
-            {listaMomentosDulces.map((img, index) => <ItemImg key={index} prod={img} />)}
-          </div>
-        </ItemListContainer>
-
-        <ItemListContainer tituloSection="Nuestra Lineas">
-          <h5>Rafaela</h5>
-
-          <ImgList />
-        </ItemListContainer>
-
-        <ItemListContainer
-          tituloSection="Pequeños pero Gigantes en Sabor"
-        >
-          <ItemList data={data} />
-        </ItemListContainer>
-
-
-        <ImageSwiper data={flyersCarruselAvisos} />
-
-        <ItemDetailContainer />
-      </main>
-    </>
+        <Route path='*' element={<Error />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

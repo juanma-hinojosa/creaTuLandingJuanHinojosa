@@ -16,7 +16,7 @@ nav {
   padding: 30px 0;
 }
 
-.max-width-container>.topbar>img {
+.max-width-container>.topbar>.logonav>img {
   width: 120px;
 }
 

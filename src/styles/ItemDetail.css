@@ -1,23 +1,29 @@
-.item-detail>h2 {
+.item-detail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+}
+
+.item-detail>article>h2 {
   font-family: 'Times New Roman', Times, serif;
   font-size: 2rem;
 }
 
-.item-detail>.price-container {
+.item-detail>article>.price-container {
   margin-top: 10px;
   display: flex;
   align-items: center;
 
 }
 
-.item-detail>.price-container>.price {
+.item-detail>article>.price-container>.price {
   font-family: 'Times New Roman', Times, serif;
   font-weight: 700;
   font-size: 2rem;
   margin-right: 40px;
 }
 
-.item-detail>.price-container>div {
+.item-detail>article>.price-container>div {
   border-radius: 4px;
   border: 1px solid rgb(199, 199, 199);
   width: 100px;
@@ -25,12 +31,15 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.item-detail>.price-container>div>span {
+.item-detail>article>.price-container>div>span {
+  display: flex;
+  align-items: center;
   text-align: center;
+  background-color: white;
 }
 
 
-.item-detail>footer {
+.item-detail>article>footer {
   width: 400px;
   background-color: rgb(45, 138, 45);
   padding: 10px 0;
@@ -39,7 +48,7 @@
   margin: 20px 0;
 }
 
-.item-detail>footer>.btn-add {
+.item-detail>article>footer>.btn-add {
   background: transparent;
   border: none;
   font-size: .8rem;
@@ -48,18 +57,26 @@
 }
 
 @media (max-width: 600px) {
-  .item-detail>.price-container {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .item-detail {
+    display: block;
+  }
+  .item-detail>article>.price-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .item-detail>figcaption>img {
     width: 50%;
   }
 
-  .item-detail>footer {
+  .item-detail>article>footer {
     width: 100%;
   }
 
+  .item-detail>article>.resumen-desk {
+    display: none;
+  }
 }
+

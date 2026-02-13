@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
 import ItemDetail from "./ItemDetail";
 import { getOneProduct } from "../mock/asyncData";
+import { useParams } from "react-router-dom";
 
 function ItemDetailContainer() {
   const [detail, setDetail] = useState({})
+  const { id } = useParams()
+  console.log(id);
+
+
   useEffect(() => {
-    getOneProduct('04')
+    getOneProduct(id)
       .then((res) => setDetail(res))
-      .catch((error) => console.log(error)
-      )
-  })
+      .catch((error) => console.log(error))
+  }, [id])
+
   return (
-    <section className="section-grid contendor-maximo" >
-      <ItemDetail detail={detail}/>
-    </section>
+    <main>
+      <section className="section-grid contendor-maximo" >
+        <ItemDetail detail={detail} />
+      </section>
+    </main>
   )
 }
 

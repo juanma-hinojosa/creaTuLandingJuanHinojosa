@@ -20,6 +20,7 @@
 }
 
 .product-card>.product-content>header>.product-title {
+  height: 50px;
   font-size: 1rem;
   font-weight: 400;
   margin-bottom: 30px;

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "../styles/ItemDetail.css"
+import { toast } from "react-toastify";
 
 function ItemDetail({ detail }) {
   const [cantidad, setCantidad] = useState(1)
@@ -17,9 +18,11 @@ function ItemDetail({ detail }) {
     }
   }
 
-  const shop = () => {
-    setComprar(!comprar)
-  }
+  const onAdd = (cantidad) => {
+      toast.success(
+        `Agregaste ${cantidad} unidades de ${detail.name} al carrito 🛒`
+      )
+    }
 
   const resumen = detail.description?.find(d => d.resumen)?.resumen
   const detalles = detail.description?.find(d => d.detalles)?.detalles || []
@@ -28,75 +31,88 @@ function ItemDetail({ detail }) {
   if (!detail.id) return <p>Cargando...</p>
 
   return (
-    <figure className="item-detail" >
-      <figcaption
-        style={{
-          border: "1px solid #e0e0e0",
-          borderRadius: '4px',
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "white",
-        }}
-      >
-        <img src={detail.img} alt={`Descripcion ${detail.name}`} />
-      </figcaption>
 
-      <h2>{detail.name}</h2>
-      <h3 style={{ fontSize: "15px", fontWeight: 'normal', color: 'gray' }} >{detail.category}</h3>
+    <>
+      <figure className="item-detail">
+        <figcaption
+          style={{
+            border: "1px solid #e0e0e0",
+            borderRadius: '4px',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "white",
+          }}
+        >
+          <img src={detail.img} alt={`Descripcion ${detail.name}`} />
+        </figcaption>
 
-      <div className="price-container">
-        <span className="price">${detail.price}
-          <span style={{ fontSize: "15px", fontWeight: 'normal', color: 'gray' }} >/u</span>
-        </span>
+        <article>
+          <h2>{detail.name}</h2>
+          <h3 style={{ fontSize: "15px", fontWeight: 'normal', color: 'gray', textTransform:'capitalize' }} >{detail.category}</h3>
+          <p style={{ margin: '40px 0' }} className="resumen-desk">{resumen}</p>
+
+          <div className="price-container">
+            <span className="price">${detail.price}
+              <span style={{ fontSize: "15px", fontWeight: 'normal', color: 'gray' }} >/u</span>
+            </span>
 
 
-        {detail.stock >= 1 && (
-          <div>
-            <button onClick={quitarProducto} disabled={cantidad === 1} >-</button>
-            <span>{cantidad}</span>
-            <button onClick={agregarProducto} disabled={cantidad === detail.stock}>+</button>
+            {detail.stock >= 1 && (
+              <div>
+                <button style={{ backgroundColor: 'white', color: 'cornflowerblue', border: 'none', fontSize: '25px' }} onClick={quitarProducto} disabled={cantidad === 1} >-</button>
+                <span>{cantidad}</span>
+                <button style={{ backgroundColor: 'white', color: 'cornflowerblue', border: 'none', fontSize: '25px' }} onClick={agregarProducto} disabled={cantidad === detail.stock}>+</button>
+              </div>
+            )}
+
           </div>
-        )}
 
-      </div>
+          <footer>
+            <button type="button" onClick={() => onAdd(cantidad)} disabled={detail.stock === 0} className="btn-add" style={{ cursor: 'pointer' }}>
+              {detail.stock === 0 ? "Sin stock" : "Añadir al carrito"}
+            </button>
+          </footer>
 
-      <footer>
-        <button type="button" onClick={shop} disabled={detail.stock === 0} className="btn-add">
-          {detail.stock === 0 ? "Sin stock" : "Añadir al carrito"}
-        </button>
-      </footer>
+          <span
+            style={{
+              backgroundColor: "#9c2423",
+              color: "white",
+              padding: "2px 8px",
+              borderRadius: "15px",
+              alignContent: 'center'
+            }}
+          >
+            {detail.stock > 0 && detail.stock <= 5
+              ? `Ultimas ${detail.stock} unidades`
+              : "Cacau para a Rafa"}
 
-      <span
-        style={{
-          backgroundColor: "#9c2423",
-          color: "white",
-          padding: "2px 8px",
-          borderRadius: "15px",
-        }}
-      >
-        {detail.stock > 0 && detail.stock <= 5
-          ? `Ultimas ${detail.stock} unidades`
-          : "Cacau para a Rafa"}
-      </span>
+            {/* <Icon icon="mdi:seed-outline" width="24" height="24" /> */}
+          </span>
 
-      <p style={{margin:'40px 0'}} >{resumen}</p>
-
-      {detalles.length > 0 && (
-        <>
-          <h4>Detalles</h4>
-          <ul style={{listStyle:"none"}} >
-            {detalles.map((item, index) => (
-              <li key={index}>- {item}</li>
-            ))}
-          </ul>
-        </>
-      )}
+          {/* <p style={{ margin: '40px 0' }} >{resumen}</p> */}
 
 
-      {/* <p>{detail.description.resumen}</p> */}
-      {/* <p>Stock: {detail.stock} unidades disponibles</p> */}
-    </figure>
+
+        </article>
+      </figure>
+
+
+      {
+        detalles.length > 0 && (
+          <>
+            <h4>Detalles</h4>
+            <p style={{ margin: '40px 0' }} >{resumen}</p>
+
+            <ul style={{ listStyle: "none" }} >
+              {detalles.map((item, index) => (
+                <li key={index}>- {item}</li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+    </>
   )
 }
 
