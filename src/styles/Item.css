@@ -26,6 +26,10 @@
   margin-bottom: 30px;
 }
 
+.product-card>.product-content>header>.product-title:hover {
+  text-decoration:underline
+}
+
 .product-card>.product-content>.price-container {
   margin-top: 10px;
   display: flex;
