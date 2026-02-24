@@ -7,6 +7,7 @@ import ItemDetailContainer from './components/ItemDetailContainer'
 import ItemListContainer from './components/ItemListContainer'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FooterComponent from './components/FooterComponent'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
 
         <Route path='*' element={<Error />} />
       </Routes>
+      <FooterComponent />
     </BrowserRouter>
   )
 }

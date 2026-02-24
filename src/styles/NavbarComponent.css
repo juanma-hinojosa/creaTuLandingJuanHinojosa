@@ -1,6 +1,5 @@
-nav {
+/* nav {
   background-color: #242424;
-  /* padding: 0 20px; */
 }
 
 .max-width-container {
@@ -45,7 +44,6 @@ nav {
 
 .max-width-container>.links-container {
   list-style: none;
-  /* padding: 20px 0; */
   max-width: 600px;
   display: flex;
   justify-content: space-between;
@@ -82,5 +80,167 @@ nav {
 
   .max-width-container>.links-container {
     display: none;
+  }
+} */
+
+nav {
+  background-color: #242424;
+  position: relative;
+}
+
+/* ============================= */
+/* CONTAINER GENERAL */
+/* ============================= */
+
+.max-width-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============================= */
+/* TOPBAR */
+/* ============================= */
+
+.max-width-container > .topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+  position: relative;
+}
+
+.max-width-container > .topbar > .logonav > img {
+  width: 120px;
+}
+
+/* ============================= */
+/* FEATURES */
+/* ============================= */
+
+.max-width-container > .topbar > .features-container {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.max-width-container > .topbar > .features-container > .login-button {
+  text-decoration: none;
+  background-color: rgb(162, 101, 73);
+  padding: 7px 20px;
+  border-radius: 5px;
+  color: rgb(231, 231, 231);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.max-width-container > .topbar > .features-container > span {
+  color: rgb(231, 231, 231);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ============================= */
+/* LINKS DESKTOP */
+/* ============================= */
+
+.max-width-container > .links-container {
+  list-style: none;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 200;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.max-width-container > .links-container > .link > a {
+  padding: 20px 15px;
+  background-color: transparent;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.max-width-container > .links-container > .link > a:hover {
+  background-color: gainsboro;
+  color: black;
+}
+
+/* ============================= */
+/* BOTÓN MOBILE */
+/* ============================= */
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .max-width-container > .topbar {
+    justify-content: space-between;
+  }
+
+  .max-width-container > .topbar > .features-container {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .max-width-container > .links-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #242424;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+    display: none;
+    z-index: 999;
+  }
+
+  .max-width-container > .links-container.active {
+    display: flex;
+    animation: slideDown 0.3s ease-in-out;
+  }
+
+  .max-width-container > .links-container > .link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .max-width-container > .links-container > .link > a {
+    display: block;
+    width: 100%;
+    padding: 15px;
+  }
+}
+
+/* ============================= */
+/* ANIMACIÓN */
+/* ============================= */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
