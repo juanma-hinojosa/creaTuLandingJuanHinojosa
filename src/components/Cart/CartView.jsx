@@ -1,56 +1,143 @@
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
 import { Icon } from "@iconify/react"
+import '../../styles/CartView.css'
+import { Link } from "react-router-dom"
 
 function CartView() {
-  const { cart, removeItem, clear, totalPrice } = useContext(CartContext)
+  const { cart, removeItem, clear, totalPrice, itemQty, totalQuantity } = useContext(CartContext)
+
+  const currencyFormatter = new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+
+  const precioEntrega = 12400
+
   return (
-    <>
-      <section className="contendor-maximo">
-        <h1
-          style={{
-            fontSize: '2rem',
-            fontWeight: '400',
-            color: 'rgb(162, 101, 73)',
-            marginBottom: '40px'
-          }}
-        >Carrito de compras</h1>
+    <section className="cartview-container">
 
-        {
-          cart.map((compra) => (
-            <article key={compra.id} style={{ border: '1px solid gray', backgroundColor: 'white', borderRadius: '4px', padding:'20px' }} >
-              <figcaption>
-                <div style={{padding:'10px', border: '1px solid grey', borderRadius:'5px', width:'200px'}} >
-                  <img src={compra.img} alt={compra.name} style={{ width: '10rem' }} />
-                </div>
-                <div>
-                  <span style={{ color: 'rgb(162, 101, 73)' }} >{compra.name}</span>
-                  <button style={{ backgroundColor: 'transparent', color: 'cornflowerblue', fontWeight: '700', padding: '5px', border: '1px solid grey', borderRadius: '5px' }} onClick={() => removeItem(compra.id)}>Eliminar <Icon icon="fluent-mdl2:delete" width="20" height="20" color="#df4d4d" /></button>
-                </div>
-              </figcaption>
+      <h1 className="cartview-title">
+        Carrito de compras
+      </h1>
+      {cart.map((compra) => {
 
-              <figure>
+        const stockActualizado = compra.stock - itemQty(compra.id)
 
-              </figure>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '2rem' }}>
+        return (
+          <article key={compra.id} className="cartview-card">
 
-                <span>${compra.price},00</span>
-                <span>cantidad: {compra.quantity}</span>
-                <span>precio final: ${compra.quantity * compra.price}, 00</span>
+            <figcaption className="cartview-card-header">
+
+              <div className="cartview-img-container">
+                <img
+                  src={compra.img}
+                  alt={compra.name}
+                  className="cartview-img"
+                />
               </div>
-            </article>
 
-          ))
-        }
+              <div className="cartview-info">
+                {/* <span className="cartview-product-name"> */}
+                <Link to={`/item/${compra.id}`} className="cartview-product-name" >
+                  {compra.name}
+                </Link>
+                {/* </span> */}
 
-        {/* FALTA HACER */}
-        <span>Total a pagar: ${totalPrice()},00</span>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '80%', padding: '2rem' }}>
-          <button className='btn btn-danger' onClick={clear}>Vaciar Carrito</button>
-          <button className='btn btn-success'>Terminar compra</button>
+                <button
+                  className="cartview-delete-btn"
+                  onClick={() => removeItem(compra.id)}
+                >
+                  Eliminar <Icon
+                    icon="fluent-mdl2:delete"
+                    width="12"
+                    height="12"
+                    color="#df4d4d"
+                  />
+                </button>
+              </div>
+
+            </figcaption>
+
+            <div className="cartview-card-footer">
+
+              <div className="column-cartview-card-footer">
+                <h4>Precio unitario</h4>
+                <span>{currencyFormatter.format(compra.price)}</span>
+              </div>
+
+              <div className="column-cartview-card-footer">
+                <h4>Cantidad</h4>
+                <span>{compra.quantity}</span>
+                <h4 style={{ marginTop: '20px' }} >{stockActualizado} en stock</h4>
+              </div>
+
+              <div className="column-cartview-card-footer">
+                <h4>Subtotal</h4>
+                <span>
+                  {currencyFormatter.format(compra.quantity * compra.price)}
+                </span>
+              </div>
+
+            </div>
+          </article>
+        )
+      })}
+
+      <button style={{color:'#df4d4d', backgroundColor:'transparent', border:'none', fontSize:'15px', marginBottom:'50px', cursor:'pointer'}} onClick={clear}>
+        Vaciar Carrito
+        <Icon
+          icon="fluent-mdl2:delete"
+          width="12"
+          height="12"
+          color="#df4d4d"
+          style={{marginLeft:'5px'}}
+        />
+      </button>
+
+      <section>
+        <h1 className="cartview-title">
+          Detalle del pedido
+        </h1>
+
+        <div className="cartview-total">
+          <h3>Cupon de Descuento</h3>
+          <hr />
+          <div>
+            <h4><Icon icon="bytesize:cart" width="22" height="22" style={{ marginRight: '10px' }} /> {totalQuantity()} producto(s) </h4>
+            <span>{currencyFormatter.format(totalPrice())}</span>
+          </div>
+
+          <div>
+            <h4><Icon icon="ph:truck-light" width="22px" height="22px" style={{ marginRight: '10px' }} /> Entrega </h4>
+            <span>{currencyFormatter.format(precioEntrega)}</span>
+          </div>
+          <hr />
+
+          <div>
+            <h4>Total a pagar:</h4>
+            <span>
+              {/* {currencyFormatter.format(totalPrice())}  */}
+
+              {currencyFormatter.format((totalPrice() + precioEntrega))}
+            </span>
+          </div>
         </div>
       </section>
-    </>
+
+
+      <div className="cartview-actions">
+        <button className="btn btn-danger" onClick={clear}>
+          Vaciar Carrito
+        </button>
+        <button className="btn btn-success">
+          Terminar compra
+        </button>
+      </div>
+
+    </section>
   )
 }
 

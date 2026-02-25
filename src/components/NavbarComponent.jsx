@@ -35,7 +35,10 @@ function NavbarComponent() {
             {menuOpen ? (
               <Icon icon="mdi:close" width="28" />
             ) : (
-              <Icon icon="mdi:menu" width="28" />
+              <>
+                <Icon icon="mdi:menu" width="28" />
+                <CartWidget />
+              </>
             )}
           </button>
         </section>
