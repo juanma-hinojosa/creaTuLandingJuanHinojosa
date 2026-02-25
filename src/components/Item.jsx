@@ -1,12 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import "../styles/Item.css"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify";
+import { CartContext } from "../context/CartContext";
 
 
 function ItemComponent({ prod }) {
   const [cantidad, setCantidad] = useState(1)
   const [comprar, setComprar] = useState(false)
+
+  const [purchase, setPurchase] = useState(false)
+  const { cart, addItem, itemQty } = useContext(CartContext)
 
   function agregarProducto() {
     if (cantidad < prod.stock) {
@@ -19,13 +23,16 @@ function ItemComponent({ prod }) {
       setCantidad(cantidad - 1)
     }
   }
-  
+
   const onAdd = (cantidad) => {
     toast.success(
-      `Agregaste ${cantidad} unidades de ${prod.name} al carrito 🛒`
+      `Agregaste ${cantidad} unidades de ${prod.name}`
     )
+    addItem(prod, cantidad)
+    setPurchase(true)
   }
 
+  const stockActualizado = prod.stock - itemQty(prod.id)
 
   return (
     <article className="product-card">
@@ -56,8 +63,8 @@ function ItemComponent({ prod }) {
             borderRadius: "15px",
           }}
         >
-          {prod.stock > 0 && prod.stock <= 5
-            ? `Ultimas ${prod.stock} unidades`
+          {stockActualizado > 0 && stockActualizado <= 5
+            ? `Ultimas ${stockActualizado} unidades`
             : "Cacau para a Rafa"}
         </span>
 
@@ -68,11 +75,11 @@ function ItemComponent({ prod }) {
           </span>
 
 
-          {prod.stock >= 1 && (
+          {stockActualizado >= 1 && (
             <div>
               <button onClick={quitarProducto} disabled={cantidad === 1} >-</button>
               <span>{cantidad}</span>
-              <button onClick={agregarProducto} disabled={cantidad === prod.stock}>+</button>
+              <button onClick={agregarProducto} disabled={cantidad === stockActualizado}>+</button>
             </div>
           )}
 
@@ -81,8 +88,8 @@ function ItemComponent({ prod }) {
 
       <footer>
         <button type="button" onClick={() => onAdd(cantidad)}
-          disabled={prod.stock === 0} className="btn-add" style={{ cursor: 'pointer' }}>
-          {prod.stock === 0 ? "Sin stock" : "Añadir al carrito"}
+          disabled={stockActualizado === 0} className="btn-add" style={{ cursor: 'pointer' }}>
+          {stockActualizado === 0 ? "Sin stock" : "Añadir al carrito"}
         </button>
       </footer>
     </article>

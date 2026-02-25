@@ -1,10 +1,17 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import "../styles/ItemDetail.css"
 import { toast } from "react-toastify";
+import { CartContext } from "../context/CartContext";
 
 function ItemDetail({ detail }) {
   const [cantidad, setCantidad] = useState(1)
   const [comprar, setComprar] = useState(false)
+
+  const [purchase, setPurchase] = useState(false)
+  const { cart, addItem, itemQty } = useContext(CartContext)
+
+  console.log(cart);
+
 
   function agregarProducto() {
     if (cantidad < detail.stock) {
@@ -19,13 +26,17 @@ function ItemDetail({ detail }) {
   }
 
   const onAdd = (cantidad) => {
-      toast.success(
-        `Agregaste ${cantidad} unidades de ${detail.name} al carrito 🛒`
-      )
-    }
+    toast.success(
+      `Agregaste ${cantidad} unidades de ${detail.name}`
+    )
+    addItem(detail, cantidad)
+    setPurchase(true)
+  }
 
   const resumen = detail.description?.find(d => d.resumen)?.resumen
   const detalles = detail.description?.find(d => d.detalles)?.detalles || []
+
+  const stockActualizado = detail.stock - itemQty(detail.id)
 
 
   if (!detail.id) return <p>Cargando...</p>
@@ -49,7 +60,7 @@ function ItemDetail({ detail }) {
 
         <article>
           <h2>{detail.name}</h2>
-          <h3 style={{ fontSize: "15px", fontWeight: 'normal', color: 'gray', textTransform:'capitalize' }} >{detail.category}</h3>
+          <h3 style={{ fontSize: "15px", fontWeight: 'normal', color: 'gray', textTransform: 'capitalize' }} >{detail.category}</h3>
           <p style={{ margin: '40px 0' }} className="resumen-desk">{resumen}</p>
 
           <div className="price-container">
@@ -58,19 +69,19 @@ function ItemDetail({ detail }) {
             </span>
 
 
-            {detail.stock >= 1 && (
+            {stockActualizado >= 1 && (
               <div>
                 <button style={{ backgroundColor: 'white', color: 'cornflowerblue', border: 'none', fontSize: '25px' }} onClick={quitarProducto} disabled={cantidad === 1} >-</button>
                 <span>{cantidad}</span>
-                <button style={{ backgroundColor: 'white', color: 'cornflowerblue', border: 'none', fontSize: '25px' }} onClick={agregarProducto} disabled={cantidad === detail.stock}>+</button>
+                <button style={{ backgroundColor: 'white', color: 'cornflowerblue', border: 'none', fontSize: '25px' }} onClick={agregarProducto} disabled={cantidad === stockActualizado}>+</button>
               </div>
             )}
 
           </div>
 
           <footer>
-            <button type="button" onClick={() => onAdd(cantidad)} disabled={detail.stock === 0} className="btn-add" style={{ cursor: 'pointer' }}>
-              {detail.stock === 0 ? "Sin stock" : "Añadir al carrito"}
+            <button type="button" onClick={() => onAdd(cantidad)} disabled={stockActualizado === 0} className="btn-add" style={{ cursor: 'pointer' }}>
+              {stockActualizado === 0 ? "Sin stock" : "Añadir al carrito"}
             </button>
           </footer>
 
@@ -83,16 +94,12 @@ function ItemDetail({ detail }) {
               alignContent: 'center'
             }}
           >
-            {detail.stock > 0 && detail.stock <= 5
-              ? `Ultimas ${detail.stock} unidades`
+            {stockActualizado > 0 && stockActualizado <= 5
+              ? `Ultimas ${stockActualizado} unidades`
               : "Cacau para a Rafa"}
 
             {/* <Icon icon="mdi:seed-outline" width="24" height="24" /> */}
           </span>
-
-          {/* <p style={{ margin: '40px 0' }} >{resumen}</p> */}
-
-
 
         </article>
       </figure>
