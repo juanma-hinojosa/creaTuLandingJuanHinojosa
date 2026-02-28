@@ -10,26 +10,30 @@ import "react-toastify/dist/ReactToastify.css";
 import FooterComponent from './components/FooterComponent'
 import CartContainer from './components/Cart/CartContainer'
 import { CartProvider } from './context/CartContext'
+import { SkeletonTheme } from 'react-loading-skeleton'
 
 function App() {
   return (
     <BrowserRouter>
-    
+
       <CartProvider>
-        <ToastContainer position="top-right" autoClose={2000} />
-        <NavbarComponent />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
+        <SkeletonTheme baseColor="#d3d3d3" highlightColor="#9b9999">
 
-          <Route path='/item/:id' element={<ItemDetailContainer />} />
-          <Route path='/category/:type' element={<ItemListContainer />} />
+          <ToastContainer position="top-right" autoClose={2000} />
+          <NavbarComponent />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
 
-          <Route path='/cart' element={<CartContainer />} />
+            <Route path='/item/:id' element={<ItemDetailContainer />} />
+            <Route path='/category/:type' element={<ItemListContainer />} />
 
-          <Route path='*' element={<Error />} />
-        </Routes>
+            <Route path='/cart' element={<CartContainer />} />
+
+            <Route path='*' element={<Error />} />
+          </Routes>
+
+        </SkeletonTheme>
       </CartProvider>
-
       <FooterComponent />
     </BrowserRouter>
   )

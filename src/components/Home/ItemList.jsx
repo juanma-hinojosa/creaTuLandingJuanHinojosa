@@ -6,16 +6,13 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import ItemSkeleton from "../ItemSkeleton";
 
 
-function ItemList({ data }) {
+function ItemList({ data, loading }) {
+  
   return (
     <>
-      {/* <div className="products-container">
-
-        {data.map((prod) => <ItemComponent key={prod.id} prod={prod} />)}
-      </div> */}
-
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
@@ -34,11 +31,17 @@ function ItemList({ data }) {
           },
         }}
       >
-        {data.slice(0,5).map((prod, index) => (
-          <SwiperSlide key={index}>
-            <ItemComponent key={prod.id} prod={prod} />
-          </SwiperSlide>
-        ))}
+        {loading
+        ? Array.from({ length: 5 }).map((_, index) => (
+            <SwiperSlide key={index}>
+              <ItemSkeleton />
+            </SwiperSlide>
+          ))
+        : data.slice(0, 5).map((prod) => (
+            <SwiperSlide key={prod.id}>
+              <ItemComponent prod={prod} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </>
 

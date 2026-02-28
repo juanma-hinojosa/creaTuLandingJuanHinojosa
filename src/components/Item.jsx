@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import { toast } from "react-toastify";
 import { CartContext } from "../context/CartContext";
 
-
 function ItemComponent({ prod }) {
   const [cantidad, setCantidad] = useState(1)
   const [comprar, setComprar] = useState(false)

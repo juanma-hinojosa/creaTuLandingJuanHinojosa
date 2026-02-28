@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getProducs } from "../mock/asyncData"
 import ItemList from "./ItemList"
+import ItemSkeleton from "./ItemSkeleton"
 
 function ItemListContainer(props) {
   const [data, setData] = useState([])
@@ -28,9 +29,21 @@ function ItemListContainer(props) {
     <main>
       <section className="section-grid contendor-maximo">
         {/* <h2 className="titulo">{tituloSection}</h2>  */}
-        {props.tituloSection}{type && <span style={{ textTransform: 'capitalize' }}>{type}</span>}
+        {props.tituloSection}{type && <span style={{ textTransform: 'capitalize', fontSize: '2rem', color: 'rgb(162, 101, 73)' }}>{type}</span>}
         {loading ? (
-          <p>Cargando productos...</p>  // 👈 texto de carga
+          // <p>Cargando productos...</p>  // 👈 texto de carga
+          <div
+            style={{
+              
+              display: "grid",
+              gap: "20px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            }}
+          >
+            {Array.from({ length: 8 }).map((_, index) => (
+              <ItemSkeleton key={index} />
+            ))}
+          </div>
         ) : (
           <ItemList data={data} />
         )}

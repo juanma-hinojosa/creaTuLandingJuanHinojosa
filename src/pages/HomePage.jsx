@@ -10,11 +10,13 @@ import ItemListContainer from "../components/Home/ItemListContainer"
 function HomePage() {
 
   const [data, setData] = useState([])
+   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getProducs()
       .then(res => setData(res))
       .catch(console.error)
+      .finally(() => setLoading(false))
   }, [])
 
   return (
@@ -24,7 +26,7 @@ function HomePage() {
       <ItemListContainer
         tituloSection="Especiales"
       >
-        <ItemList data={data} />
+        <ItemList data={data} loading={loading} />
       </ItemListContainer>
 
 
@@ -45,7 +47,7 @@ function HomePage() {
       <ItemListContainer
         tituloSection="Pequeños pero Gigantes en Sabor"
       >
-        <ItemList data={data} />
+        <ItemList data={data} loading={loading}/>
       </ItemListContainer>
 
 
