@@ -86,16 +86,23 @@ function CartView() {
         )
       })}
 
-      <button style={{color:'#df4d4d', backgroundColor:'transparent', border:'none', fontSize:'15px', marginBottom:'50px', cursor:'pointer'}} onClick={clear}>
-        Vaciar Carrito
-        <Icon
-          icon="fluent-mdl2:delete"
-          width="12"
-          height="12"
-          color="#df4d4d"
-          style={{marginLeft:'5px'}}
-        />
-      </button>
+
+      <div
+        style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: '50px'}}
+      >
+        <button style={{ color: '#df4d4d', backgroundColor: 'transparent', border: 'none', fontSize: '15px', cursor: 'pointer' }} onClick={clear}>
+          Vaciar Carrito
+          <Icon
+            icon="fluent-mdl2:delete"
+            width="12"
+            height="12"
+            color="#df4d4d"
+            style={{ marginLeft: '5px' }}
+          />
+        </button>
+
+        <Link to='/' style={{textDecoration:'none', color:'cornflowerblue', fontSize: '15px'}} > Continuar comprando <Icon icon="formkit:arrowright" width="21.34px" height="12px" /> </Link>
+      </div>
 
       <section>
         <h1 className="cartview-title">
@@ -105,20 +112,20 @@ function CartView() {
         <div className="cartview-total">
           <h3>Cupon de Descuento</h3>
           <hr />
-          <div>
+          <div style={{textTransform:'uppercase'}} >
             <h4><Icon icon="bytesize:cart" width="22" height="22" style={{ marginRight: '10px' }} /> {totalQuantity()} producto(s) </h4>
             <span>{currencyFormatter.format(totalPrice())}</span>
           </div>
 
-          <div>
+          <div style={{color:'#642222', textTransform:'uppercase', marginTop:'20px'}}>
             <h4><Icon icon="ph:truck-light" width="22px" height="22px" style={{ marginRight: '10px' }} /> Entrega </h4>
             <span>{currencyFormatter.format(precioEntrega)}</span>
           </div>
           <hr />
 
-          <div>
-            <h4>Total a pagar:</h4>
-            <span>
+          <div style={{color:'#411616'}}>
+            <h4 style={{textTransform:'uppercase' }} >Total a pagar:</h4>
+            <span style={{fontSize:'1.4rem', fontWeight:'500'}} >
               {/* {currencyFormatter.format(totalPrice())}  */}
 
               {currencyFormatter.format((totalPrice() + precioEntrega))}
@@ -128,14 +135,20 @@ function CartView() {
       </section>
 
 
-      <div className="cartview-actions">
+      {/* <div className="cartview-actions">
         <button className="btn btn-danger" onClick={clear}>
           Vaciar Carrito
         </button>
         <button className="btn btn-success">
           Terminar compra
         </button>
-      </div>
+      </div> */}
+
+      <button 
+        className="comprar-buton"
+      >
+        Terminar compra
+      </button>
 
     </section>
   )

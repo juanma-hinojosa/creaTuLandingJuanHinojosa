@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import ItemList from "../Home/ItemList"
-import ItemListContainer from "../Home/ItemListContainer"
 import { getProducs } from "../../mock/asyncData"
+import ItemListContainer from "../ItemListContainer"
+import ItemList from "../ItemList"
 
 function EmptyCart() {
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getProducs()
@@ -39,11 +40,18 @@ function EmptyCart() {
 
 
       </section>
+
       <ItemListContainer
+        tituloSection="Los Mas Elegidos"
+      >
+        <ItemList data={data} loading={loading} />
+      </ItemListContainer>
+
+      {/* <ItemListContainer
         tituloSection="Los mas Elegidos"
       >
         <ItemList data={data} />
-      </ItemListContainer>
+      </ItemListContainer> */}
     </>
   )
 }

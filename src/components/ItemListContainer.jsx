@@ -28,7 +28,6 @@ function ItemListContainer(props) {
   return (
     <main>
       <section className="section-grid contendor-maximo">
-        {/* <h2 className="titulo">{tituloSection}</h2>  */}
         {props.tituloSection}{type && <span style={{ textTransform: 'capitalize', fontSize: '2rem', color: 'rgb(162, 101, 73)' }}>{type}</span>}
         {loading ? (
           // <p>Cargando productos...</p>  // 👈 texto de carga

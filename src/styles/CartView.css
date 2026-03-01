@@ -133,6 +133,16 @@ section>.cartview-total>div>h4 {
   padding: 2rem;
 }
 
+.comprar-buton {
+  margin-top: 50px;
+  width: 100%;
+  background-color: rgb(45, 138, 45);
+  padding: 15px 0;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+}
+
 @media (min-width: 750px) {
   .cartview-card {
     display: flex;
