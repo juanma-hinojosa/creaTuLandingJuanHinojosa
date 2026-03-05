@@ -10,9 +10,10 @@ import ItemListContainer from "../components/Home/ItemListContainer"
 function HomePage() {
 
   const [data, setData] = useState([])
-   const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+
     getProducs()
       .then(res => setData(res))
       .catch(console.error)
@@ -47,7 +48,7 @@ function HomePage() {
       <ItemListContainer
         tituloSection="Pequeños pero Gigantes en Sabor"
       >
-        <ItemList data={data} loading={loading}/>
+        <ItemList data={data} loading={loading} />
       </ItemListContainer>
 
 

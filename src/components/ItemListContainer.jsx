@@ -3,27 +3,48 @@ import { useParams } from "react-router-dom"
 import { getProducs } from "../mock/asyncData"
 import ItemList from "./ItemList"
 import ItemSkeleton from "./ItemSkeleton"
+import { collection, getDocs, query, where } from "firebase/firestore"
+import { db } from "../service/firebase"
 
 function ItemListContainer(props) {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const { type } = useParams()
 
+  // useEffect(() => {
+  //   setLoading(true)
+  //   getProducs()
+  //     .then((res) => {
+  //       if (type) {
+  //         setData(res.filter((prod) => prod.category === type))
+  //       } else {
+  //         setData(res)
+  //       }
+  //     })
+  //     .catch((error) => console.error(error))
+  //     .finally(() => setLoading(false))
+  // }, [type])
+
   useEffect(() => {
     setLoading(true)
-    getProducs()
-      .then((res) => {
-        if (type) {
-          setData(res.filter((prod) => prod.category === type))
-        } else {
-          setData(res)
-        }
-      })
+    const prodColl = type ? query(collection(db, 'items'), where('category', '==', type)) : collection(db, 'items')
+
+    getDocs(prodColl)
+      .then((res => {
+        const list = res.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data()
+          }
+        })
+        // console.log(list);
+        setData(list)
+      }))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false))
   }, [type])
 
-  console.log(type)
+  // console.log(type)
 
   return (
     <main>
@@ -33,7 +54,7 @@ function ItemListContainer(props) {
           // <p>Cargando productos...</p>  // 👈 texto de carga
           <div
             style={{
-              
+
               display: "grid",
               gap: "20px",
               gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",

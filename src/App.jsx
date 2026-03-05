@@ -11,6 +11,7 @@ import FooterComponent from './components/FooterComponent'
 import CartContainer from './components/Cart/CartContainer'
 import { CartProvider } from './context/CartContext'
 import { SkeletonTheme } from 'react-loading-skeleton'
+import AdminPage from './pages/AdminPage'
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
           <NavbarComponent />
           <Routes>
             <Route path='/' element={<HomePage />} />
+
+            <Route path='/admin' element={<AdminPage />} />
 
             <Route path='/item/:id' element={<ItemDetailContainer />} />
             <Route path='/category/:type' element={<ItemListContainer />} />

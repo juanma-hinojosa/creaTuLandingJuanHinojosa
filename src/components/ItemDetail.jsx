@@ -4,6 +4,9 @@ import { toast } from "react-toastify"
 import { CartContext } from "../context/CartContext"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
+import { addDoc, collection } from "firebase/firestore"
+import { db } from "../service/firebase"
+import { productos } from "../mock/asyncData"
 
 function ItemDetail({ detail }) {
   const [cantidad, setCantidad] = useState(1)
@@ -35,9 +38,19 @@ function ItemDetail({ detail }) {
     ? detail.stock - itemQty(detail.id)
     : 0
 
+  // const subirProd = () => {
+  //   console.log('SUBIENDO DATA...')
+  //   const collASubir = collection(db, "items")
+  //   productos.map((prod) => addDoc(collASubir, prod))
+  // }
+
   return (
     <>
       <figure className="item-detail">
+
+
+        {/* <button onClick={subirProd}>SUBIR DATA</button> */}
+
         <figcaption
           style={{
             border: "1px solid #e0e0e0",
@@ -57,7 +70,7 @@ function ItemDetail({ detail }) {
             <img
               src={detail.img}
               alt={`Descripcion ${detail.name}`}
-              style={{  width: "100%" }}
+              style={{ width: "100%" }}
             />
           )}
         </figcaption>
@@ -135,7 +148,7 @@ function ItemDetail({ detail }) {
                 onClick={() => onAdd(cantidad)}
                 disabled={stockActualizado === 0}
                 className="btn-add"
-                style={{cursor:'pointer'}}
+                style={{ cursor: 'pointer' }}
               >
                 {stockActualizado === 0
                   ? "Sin stock"
