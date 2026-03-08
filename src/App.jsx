@@ -12,6 +12,7 @@ import CartContainer from './components/Cart/CartContainer'
 import { CartProvider } from './context/CartContext'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import AdminPage from './pages/AdminPage'
+import CheckoutPage from './components/Checkout'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path='/category/:type' element={<ItemListContainer />} />
 
             <Route path='/cart' element={<CartContainer />} />
+            <Route path='/checkout' element={<CheckoutPage />} />
 
             <Route path='*' element={<Error />} />
           </Routes>
