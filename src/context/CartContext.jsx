@@ -25,10 +25,6 @@ export const CartProvider = ({ children }) => {
     setCart([])
   }
 
-  // const removeItem = (id) => {
-  //   return setCart.filter((prod) => prod.id !== id)
-  // }
-
   const removeItem = (id) => {
     setCart(cart.filter((prod) => prod.id !== id))
   }
@@ -37,7 +33,6 @@ export const CartProvider = ({ children }) => {
     return cart.some((prod) => prod.id === id)
   }
 
-  //OPCIONAL
   const itemQty = (id) => {
     const itemIn = cart.find((prod) => prod.id === id)
     if (itemIn) {
@@ -52,8 +47,8 @@ export const CartProvider = ({ children }) => {
   }
 
   const totalPrice = () => {
-  return cart.reduce((acc, prod) => acc + prod.price * prod.quantity, 0)
-}
+    return cart.reduce((acc, prod) => acc + prod.price * prod.quantity, 0)
+  }
 
   return (
     <CartContext.Provider value={{ cart, addItem, clear, removeItem, itemQty, totalQuantity, totalPrice }}>

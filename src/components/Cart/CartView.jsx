@@ -2,9 +2,10 @@ import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
 import { Icon } from "@iconify/react"
 import '../../styles/CartView.css'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function CartView() {
+  const navigate = useNavigate()
   const { cart, removeItem, clear, totalPrice, itemQty, totalQuantity } = useContext(CartContext)
 
   const currencyFormatter = new Intl.NumberFormat('es-AR', {
@@ -126,26 +127,16 @@ function CartView() {
           <div style={{color:'#411616'}}>
             <h4 style={{textTransform:'uppercase' }} >Total a pagar:</h4>
             <span style={{fontSize:'1.4rem', fontWeight:'500'}} >
-              {/* {currencyFormatter.format(totalPrice())}  */}
-
               {currencyFormatter.format((totalPrice() + precioEntrega))}
             </span>
           </div>
         </div>
       </section>
 
-
-      {/* <div className="cartview-actions">
-        <button className="btn btn-danger" onClick={clear}>
-          Vaciar Carrito
-        </button>
-        <button className="btn btn-success">
-          Terminar compra
-        </button>
-      </div> */}
-
       <button 
         className="comprar-buton"
+        onClick={() => navigate('/checkout', { state: { fromCart: true } })}
+        style={{cursor:"pointer"}}
       >
         Terminar compra
       </button>

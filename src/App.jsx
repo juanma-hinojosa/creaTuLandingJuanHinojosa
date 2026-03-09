@@ -18,6 +18,8 @@ function App() {
   return (
     <BrowserRouter>
 
+      {/* Afuera del CartProvider debo agregar el AuthProvider  */}
+
       <CartProvider>
         <SkeletonTheme baseColor="#d3d3d3" highlightColor="#9b9999">
 
@@ -39,6 +41,8 @@ function App() {
 
         </SkeletonTheme>
       </CartProvider>
+
+
       <FooterComponent />
     </BrowserRouter>
   )
