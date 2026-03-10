@@ -28,6 +28,7 @@ function ItemComponent({ prod }) {
       `Agregaste ${cantidad} unidades de ${prod.name}`
     )
     addItem(prod, cantidad)
+    setCantidad(1)
     setPurchase(true)
   }
 

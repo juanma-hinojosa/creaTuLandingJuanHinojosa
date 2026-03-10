@@ -5,7 +5,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+// import 'swiper/css/pagination';
 import ItemSkeleton from "../ItemSkeleton";
 
 
@@ -14,7 +14,7 @@ function ItemList({ data, loading }) {
   return (
     <>
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation,  Autoplay]}
         navigation
         pagination={{ clickable: true }}
         loop
