@@ -4,6 +4,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { db } from "../service/firebase"
 import EmptyCart from "./Cart/EmptyCart"
 import { Link, Navigate, useLocation } from "react-router-dom"
+import OrderConfirmComponent from "./OrderConfirmComponent"
 
 function CheckoutPage() {
   const [buyer, setBuyer] = useState({})
@@ -85,12 +86,9 @@ function CheckoutPage() {
         {
           orderId
             ?
-            // debo crear un componente 
-            <div>
-              <h1>Muchas gracias por tu compra! 🥳</h1>
-              <h3>Su orden es: {orderId}</h3>
-              <Link className='btn btn-dark' to='/'>Volver a Home</Link>
-            </div>
+            <OrderConfirmComponent
+              orderId={orderId}
+            />
             :
             <div
               style={{ maxWidth: '600px', padding: '20px' }}

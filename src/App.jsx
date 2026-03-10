@@ -28,7 +28,8 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
 
-            <Route path='/admin' element={<AdminPage />} />
+            {/* Prueba para futuro adminpage  */}
+            {/* <Route path='/admin' element={<AdminPage />} /> */}
 
             <Route path='/item/:id' element={<ItemDetailContainer />} />
             <Route path='/category/:type' element={<ItemListContainer />} />

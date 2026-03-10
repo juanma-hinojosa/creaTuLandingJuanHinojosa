@@ -11,20 +11,6 @@ function ItemListContainer(props) {
   const [loading, setLoading] = useState(true)
   const { type } = useParams()
 
-  // useEffect(() => {
-  //   setLoading(true)
-  //   getProducs()
-  //     .then((res) => {
-  //       if (type) {
-  //         setData(res.filter((prod) => prod.category === type))
-  //       } else {
-  //         setData(res)
-  //       }
-  //     })
-  //     .catch((error) => console.error(error))
-  //     .finally(() => setLoading(false))
-  // }, [type])
-
   useEffect(() => {
     setLoading(true)
     const prodColl = type ? query(collection(db, 'items'), where('category', '==', type)) : collection(db, 'items')
