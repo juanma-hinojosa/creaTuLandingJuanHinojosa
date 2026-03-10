@@ -24,11 +24,6 @@ function ItemDetailContainer() {
       .catch((error) => console.log(error))
   }, [id])
 
-  // useEffect(() => {
-  //   getOneProduct(id)
-  //     .then((res) => setDetail(res))
-  //     .catch((error) => console.log(error))
-  // }, [id])
 
   return (
     <main>

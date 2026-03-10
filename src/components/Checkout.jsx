@@ -5,6 +5,9 @@ import { db } from "../service/firebase"
 import EmptyCart from "./Cart/EmptyCart"
 import { Link, Navigate, useLocation } from "react-router-dom"
 import OrderConfirmComponent from "./OrderConfirmComponent"
+import { useForm } from "react-hook-form"
+
+
 
 function CheckoutPage() {
   const [buyer, setBuyer] = useState({})
@@ -91,7 +94,7 @@ function CheckoutPage() {
             />
             :
             <div
-              style={{ maxWidth: '600px', padding: '20px' }}
+              style={{ maxWidth: '700px', padding: '20px' }}
             >
               <div style={{ padding: '20px', backgroundColor: '#f3f2f2', border: '1px solid #eeeded', borderRadius: '4px', maxWidth: '500px' }} >
                 <h1 style={{ color: '#6e2b2b', letterSpacing: '0px' }} >Completa los campos</h1>

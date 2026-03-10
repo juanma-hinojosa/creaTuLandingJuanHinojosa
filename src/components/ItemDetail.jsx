@@ -15,7 +15,7 @@ function ItemDetail({ detail }) {
   const isLoading = !detail?.id
 
   function agregarProducto() {
-    if (cantidad < detail.stock) {
+    if (cantidad < stockActualizado) {
       setCantidad(cantidad + 1)
     }
   }
@@ -29,6 +29,7 @@ function ItemDetail({ detail }) {
   const onAdd = (cantidad) => {
     toast.success(`Agregaste ${cantidad} unidades de ${detail.name}`)
     addItem(detail, cantidad)
+    setCantidad(1)
   }
 
   const resumen = detail?.description?.find(d => d.resumen)?.resumen
@@ -60,8 +61,6 @@ function ItemDetail({ detail }) {
             justifyContent: "center",
             backgroundColor: "white",
             padding: '50px'
-            // height: "350px",
-            // width: "350px"
           }}
         >
           {isLoading ? (

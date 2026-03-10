@@ -27,6 +27,13 @@ function AdminPage() {
   //     .then(item => setSingleITem(item))
   // }
 
+
+   {/* // const subirProd = () => {
+  //   console.log('SUBIENDO DATA...')
+  //   const collASubir = collection(db, "items")
+  //   productos.map((prod) => addDoc(collASubir, prod))
+  //  */}
+
   return (
     <main>
       <h1>AdminPage</h1>
@@ -42,6 +49,12 @@ function AdminPage() {
           {singleItem.name} - {singleItem.price}
         </p>
       )}
+
+
+
+     
+
+   {/* <button onClick={subirProd}>SUBIR DATA</button> */}
     </main>
   )
 }

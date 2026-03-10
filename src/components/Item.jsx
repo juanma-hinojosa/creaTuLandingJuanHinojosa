@@ -12,7 +12,7 @@ function ItemComponent({ prod }) {
   const { cart, addItem, itemQty } = useContext(CartContext)
 
   function agregarProducto() {
-    if (cantidad < prod.stock) {
+    if (cantidad < stockActualizado) {
       setCantidad(cantidad + 1)
     }
   }
