@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { CartContext } from "../context/CartContext"
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { addDoc, collection, serverTimestamp, writeBatch, doc } from "firebase/firestore"
 import { db } from "../service/firebase"
 import EmptyCart from "./Cart/EmptyCart"
 import { Link, Navigate, useLocation } from "react-router-dom"
@@ -21,35 +21,86 @@ function CheckoutPage() {
     return <Navigate to="/cart" replace />
   }
 
-  const finalizarCompra = (data) => {
+  // const finalizarCompra = (data) => {
+  //   const { name, lastname, address, email } = data
+  //   setLoading(true)
+
+  //   let order = {
+  //     // Comprador es el objeto con los datos del comprador
+  //     comprador: {
+  //       name, lastname, address, email
+  //     },
+  //     compras: cart,
+  //     total: totalPrice(),
+  //     fecha: serverTimestamp()
+  //   }
+  //   // Creamos Ref
+  //   const orderColl = collection(db, 'orders')
+
+  //   // Agregamos el doc
+  //   addDoc(orderColl, order)
+  //     .then((res) => {
+  //       setOrderId(res.id)
+  //       // Borramos el carrito
+  //       clear()
+  //     })
+  //     .catch((error) => console.log(error))
+  //     .finally(() => setLoading(false))
+  // }
+
+
+  const finalizarCompra = async (data) => {
+
     const { name, lastname, address, email } = data
     setLoading(true)
 
-    let order = {
-      // Comprador es el objeto con los datos del comprador
-      comprador: {
-        name, lastname, address, email
-      },
-      compras: cart,
-      total: totalPrice(),
-      fecha: serverTimestamp()
-    }
-    // Creamos Ref
-    const orderColl = collection(db, 'orders')
+    const batch = writeBatch(db)
 
-    // Agregamos el doc
-    addDoc(orderColl, order)
-      .then((res) => {
-        setOrderId(res.id)
-        // Borramos el carrito
-        clear()
+    try {
+
+      // descontar stock
+      cart.forEach((product) => {
+
+        const productRef = doc(db, "items", product.id)
+
+        batch.update(productRef, {
+          stock: product.stock - product.quantity
+        })
+
       })
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false))
+
+      let order = {
+        comprador: {
+          name,
+          lastname,
+          address,
+          email
+        },
+        compras: cart,
+        total: totalPrice(),
+        fecha: serverTimestamp()
+      }
+
+      const orderRef = doc(collection(db, "orders"))
+
+      batch.set(orderRef, order)
+
+      await batch.commit()
+
+      setOrderId(orderRef.id)
+
+      clear()
+
+    } catch (error) {
+
+      console.log(error)
+
+    } finally {
+
+      setLoading(false)
+
+    }
   }
-
-
-
 
   if (!cart.length && !orderId) {
     return (
@@ -62,16 +113,8 @@ function CheckoutPage() {
   }
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
+    <main style={styles.mainStyles}>
       <section className="contendor-maximo">
-
         {
           orderId
             ?
@@ -93,3 +136,12 @@ function CheckoutPage() {
 
 
 export default CheckoutPage
+
+const styles = {
+  mainStyles: {
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+}

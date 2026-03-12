@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 function CartView() {
   const navigate = useNavigate()
-  const { cart, removeItem, clear, totalPrice, itemQty, totalQuantity } = useContext(CartContext)
+  const { cart, removeItem, clear, totalPrice, itemQty, totalQuantity, valorServicioPlataforma, valorEntrega, precioFinal } = useContext(CartContext)
 
   const currencyFormatter = new Intl.NumberFormat('es-AR', {
     style: 'currency',
@@ -14,8 +14,6 @@ function CartView() {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })
-
-  const precioEntrega = 12400
 
   return (
     <section className="cartview-container">
@@ -89,7 +87,7 @@ function CartView() {
 
 
       <div
-        style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: '50px'}}
+        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '50px' }}
       >
         <button style={{ color: '#df4d4d', backgroundColor: 'transparent', border: 'none', fontSize: '15px', cursor: 'pointer' }} onClick={clear}>
           Vaciar Carrito
@@ -102,7 +100,7 @@ function CartView() {
           />
         </button>
 
-        <Link to='/' style={{textDecoration:'none', color:'cornflowerblue', fontSize: '15px'}} > Continuar comprando <Icon icon="formkit:arrowright" width="21.34px" height="12px" /> </Link>
+        <Link to='/' style={{ textDecoration: 'none', color: 'cornflowerblue', fontSize: '15px' }} > Continuar comprando <Icon icon="formkit:arrowright" width="21.34px" height="12px" /> </Link>
       </div>
 
       <section>
@@ -113,30 +111,37 @@ function CartView() {
         <div className="cartview-total">
           <h3>Cupon de Descuento</h3>
           <hr />
-          <div style={{textTransform:'uppercase'}} >
+          <div style={{ textTransform: 'uppercase' }} >
             <h4><Icon icon="bytesize:cart" width="22" height="22" style={{ marginRight: '10px' }} /> {totalQuantity()} producto(s) </h4>
             <span>{currencyFormatter.format(totalPrice())}</span>
           </div>
 
-          <div style={{color:'#642222', textTransform:'uppercase', marginTop:'20px'}}>
+
+          <div style={{ textTransform: 'uppercase' }} >
+            <h4><Icon icon="lets-icons:paper-light" width="22" height="22" style={{ marginRight: '10px' }} /> Tarifa de servicio  </h4>
+            <span>{currencyFormatter.format(valorServicioPlataforma())}</span>
+          </div>
+
+
+          <div style={{ color: '#642222', textTransform: 'uppercase', marginTop: '20px' }}>
             <h4><Icon icon="ph:truck-light" width="22px" height="22px" style={{ marginRight: '10px' }} /> Entrega </h4>
-            <span>{currencyFormatter.format(precioEntrega)}</span>
+            <span>{currencyFormatter.format(valorEntrega())}</span>
           </div>
           <hr />
 
-          <div style={{color:'#411616'}}>
-            <h4 style={{textTransform:'uppercase' }} >Total a pagar:</h4>
-            <span style={{fontSize:'1.4rem', fontWeight:'500'}} >
-              {currencyFormatter.format((totalPrice() + precioEntrega))}
+          <div style={{ color: '#411616' }}>
+            <h4 style={{ textTransform: 'uppercase' }} >Total a pagar:</h4>
+            <span style={{ fontSize: '1.4rem', fontWeight: '500' }} >
+              {currencyFormatter.format(precioFinal())}
             </span>
           </div>
         </div>
       </section>
 
-      <button 
+      <button
         className="comprar-buton"
         onClick={() => navigate('/checkout', { state: { fromCart: true } })}
-        style={{cursor:"pointer"}}
+        style={{ cursor: "pointer" }}
       >
         Terminar compra
       </button>
