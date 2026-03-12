@@ -17,37 +17,10 @@ function CheckoutPage() {
   const { register, handleSubmit, formState: { errors }, getValues } = useForm()
 
   const location = useLocation()
+
   if (!location.state?.fromCart) {
     return <Navigate to="/cart" replace />
   }
-
-  // const finalizarCompra = (data) => {
-  //   const { name, lastname, address, email } = data
-  //   setLoading(true)
-
-  //   let order = {
-  //     // Comprador es el objeto con los datos del comprador
-  //     comprador: {
-  //       name, lastname, address, email
-  //     },
-  //     compras: cart,
-  //     total: totalPrice(),
-  //     fecha: serverTimestamp()
-  //   }
-  //   // Creamos Ref
-  //   const orderColl = collection(db, 'orders')
-
-  //   // Agregamos el doc
-  //   addDoc(orderColl, order)
-  //     .then((res) => {
-  //       setOrderId(res.id)
-  //       // Borramos el carrito
-  //       clear()
-  //     })
-  //     .catch((error) => console.log(error))
-  //     .finally(() => setLoading(false))
-  // }
-
 
   const finalizarCompra = async (data) => {
 
@@ -80,25 +53,15 @@ function CheckoutPage() {
         total: totalPrice(),
         fecha: serverTimestamp()
       }
-
       const orderRef = doc(collection(db, "orders"))
-
       batch.set(orderRef, order)
-
       await batch.commit()
-
       setOrderId(orderRef.id)
-
       clear()
-
     } catch (error) {
-
       console.log(error)
-
     } finally {
-
       setLoading(false)
-
     }
   }
 

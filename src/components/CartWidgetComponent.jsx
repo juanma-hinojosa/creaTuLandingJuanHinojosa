@@ -20,10 +20,6 @@ function CartWidget() {
           <div style={{ display: 'flex', alignItems: 'center' }} >
             <Icon icon="lineicons:cart-1" width="24" height="24" />
 
-            {/* <div style={{ backgroundColor: '#ee2c2c', textAlign: 'center', fontSize: '.8rem', borderRadius: '20px', width: '20px', height: '20px' }}>
-              {totalQuantity()}
-            </div> */}
-
             {quantity > 0 && (
               <div
                 style={{

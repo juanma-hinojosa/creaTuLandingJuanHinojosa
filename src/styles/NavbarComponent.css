@@ -1,88 +1,3 @@
-/* nav {
-  background-color: #242424;
-}
-
-.max-width-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.max-width-container>.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 0;
-}
-
-.max-width-container>.topbar>.logonav>img {
-  width: 120px;
-}
-
-.max-width-container>.topbar>.features-container {
-  width: 500px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.max-width-container>.topbar>.features-container>.login-button {
-  text-decoration: none;
-  background-color: rgb(162, 101, 73);
-  padding: 7px 20px;
-  border-radius: 5px;
-  color: rgb(231, 231, 231);
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.max-width-container>.topbar>.features-container>span {
-  color: rgb(231, 231, 231);
-  font-weight: 600;
-  font-size: .9rem;
-}
-
-.max-width-container>.links-container {
-  list-style: none;
-  max-width: 600px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.1rem;
-  font-weight: 200;
-}
-
-
-.max-width-container>.links-container {
-  margin-top: 20px;
-}
-
-.max-width-container>.links-container>.link>a {
-  padding: 20px 15px;
-  background-color: transparent;
-  color: white;
-  text-decoration: none;
-}
-
-
-.max-width-container>.links-container>.link>a:hover {
-  background-color: gainsboro;
-  color: black;
-}
-
-@media (max-width: 600px) {
-  .max-width-container>.topbar>.features-container {
-    display: none;
-  }
-  .max-width-container>.topbar {
-   display: flex;
-   justify-content: center;
-  }
-
-  .max-width-container>.links-container {
-    display: none;
-  }
-} */
-
 nav {
   background-color: #242424;
   position: relative;
@@ -185,6 +100,17 @@ nav {
 /* MOBILE */
 /* ============================= */
 
+/* ============================= */
+/* MOBILE ACTIONS */
+/* ============================= */
+
+.mobile-actions{
+  display: none;
+  align-items: center;
+  gap: 15px;
+}
+
+
 @media (max-width: 768px) {
 
   .max-width-container > .topbar {
@@ -196,8 +122,12 @@ nav {
   }
 
   .menu-toggle {
-    display: block;
-  }
+  display: block;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
 
   .max-width-container > .links-container {
     position: absolute;
@@ -228,6 +158,10 @@ nav {
     width: 100%;
     padding: 15px;
   }
+
+  .mobile-actions{
+  display: flex;
+}
 }
 
 /* ============================= */

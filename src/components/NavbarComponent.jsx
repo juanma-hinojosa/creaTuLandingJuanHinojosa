@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Icon } from "@iconify/react";
 import CartWidget from "./CartWidgetComponent";
 import "../styles/NavbarComponent.css";
-import Logo from "/logo.png";
+import Logo from "/cacaushow-logo.png";
 import { NavLink } from "react-router-dom";
 
 function NavbarComponent() {
@@ -31,16 +31,27 @@ function NavbarComponent() {
           </div>
 
           {/* Botón Mobile */}
-          <button className="menu-toggle" onClick={toggleMenu}>
+          <div className="mobile-actions">
+            <CartWidget />
+
+            <button className="menu-toggle" onClick={toggleMenu}>
+              {menuOpen ? (
+                <Icon icon="mdi:close" width="28" />
+              ) : (
+                <Icon icon="mdi:menu" width="28" />
+              )}
+            </button>
+          </div>
+
+          {/* <button className="menu-toggle" onClick={toggleMenu}>
             {menuOpen ? (
               <Icon icon="mdi:close" width="28" />
             ) : (
               <>
                 <Icon icon="mdi:menu" width="28" />
-                <CartWidget />
               </>
             )}
-          </button>
+          </button> */}
         </section>
 
         <ul className={`links-container ${menuOpen ? "active" : ""}`}>
