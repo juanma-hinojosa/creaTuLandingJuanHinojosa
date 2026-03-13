@@ -13,6 +13,7 @@ import { CartProvider } from './context/CartContext'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import AdminPage from './pages/AdminPage'
 import CheckoutPage from './components/Checkout'
+import SwipperComponent from './components/SwipperComponent'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <SkeletonTheme baseColor="#d3d3d3" highlightColor="#9b9999">
 
           <ToastContainer position="top-right" autoClose={2000} />
+          <SwipperComponent />
           <NavbarComponent />
           <Routes>
             <Route path='/' element={<HomePage />} />

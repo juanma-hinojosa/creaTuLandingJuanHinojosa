@@ -42,16 +42,6 @@ function NavbarComponent() {
               )}
             </button>
           </div>
-
-          {/* <button className="menu-toggle" onClick={toggleMenu}>
-            {menuOpen ? (
-              <Icon icon="mdi:close" width="28" />
-            ) : (
-              <>
-                <Icon icon="mdi:menu" width="28" />
-              </>
-            )}
-          </button> */}
         </section>
 
         <ul className={`links-container ${menuOpen ? "active" : ""}`}>

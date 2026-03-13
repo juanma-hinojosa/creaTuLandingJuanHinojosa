@@ -67,9 +67,7 @@ function CheckoutPage() {
 
   if (!cart.length && !orderId) {
     return (
-      <main
-        style={{ minHeight: '100vh', padding: '40px 20px' }}
-      >
+      <main style={{ minHeight: '100vh', padding: '40px 20px' }}>
         <EmptyCart />
       </main>
     )
