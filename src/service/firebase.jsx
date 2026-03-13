@@ -27,6 +27,7 @@ const analytics = getAnalytics(app);
 // const db = getFirestore(app)
 
 export const db = getFirestore(app)
+export const auth = getAuth(app)
 
 // export async function getProducts() {
 //   const querySnapshot = await getDocs(collection(db, 'items'))
