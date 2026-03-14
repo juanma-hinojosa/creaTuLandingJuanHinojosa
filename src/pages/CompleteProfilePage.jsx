@@ -2,76 +2,41 @@ import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Auth.css"
+import { useForm } from "react-hook-form";
 
 
 function CompleteProfilePage() {
-
   const { user, completeProfile } = useAuth();
-
   const navigate = useNavigate();
+  const { register, handleSubmit } = useForm()
 
-  const [form, setForm] = useState({
-    lastName: "",
-    telefono: "",
-    address: "",
-    addressNum: "",
-    postalCode: "",
-    city: "",
-    provincia: ""
-  });
+  const onSubmit = async (data) => {
+    await completeProfile(user.uid, data)
+    navigate('/')
+  }
 
-  const handleChange = (e) => {
-
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-
-  };
-
-  const handleSubmit = async (e) => {
-
-    e.preventDefault();
-
-    await completeProfile(user.uid, form);
-
-    navigate("/");
-
-  };
 
   return (
-  <main className="auth-main">
+    <main className="auth-main">
+      <section className="auth-card">
+        <h2>Completar Perfil</h2>
 
-    <section className="auth-card">
+        <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
+          <input placeholder="Apellido" {...register("lastName")} />
+          <input placeholder="Teléfono" {...register("telefono")} />
+          <input placeholder="Dirección" {...register("address")} />
+          <input placeholder="Número" {...register("addressNum")} />
+          <input placeholder="Código Postal" {...register("postalCode")} />
+          <input placeholder="Ciudad" {...register("city")} />
+          <input placeholder="Provincia" {...register("provincia")} />
 
-      <h2>Completar Perfil</h2>
-
-      <form onSubmit={handleSubmit} className="auth-form">
-
-        <input name="lastName" placeholder="Apellido" onChange={handleChange} />
-
-        <input name="telefono" placeholder="Teléfono" onChange={handleChange} />
-
-        <input name="address" placeholder="Dirección" onChange={handleChange} />
-
-        <input name="addressNum" placeholder="Número" onChange={handleChange} />
-
-        <input name="postalCode" placeholder="Código Postal" onChange={handleChange} />
-
-        <input name="city" placeholder="Ciudad" onChange={handleChange} />
-
-        <input name="provincia" placeholder="Provincia" onChange={handleChange} />
-
-        <button type="submit">
-          Guardar
-        </button>
-
-      </form>
-
-    </section>
-
-  </main>
-);
+          <button type="submit">
+            Guardar
+          </button>
+        </form>
+      </section>
+    </main>
+  );
 }
 
 export default CompleteProfilePage;

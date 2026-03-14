@@ -23,14 +23,12 @@ function CheckoutPage() {
   }
 
   const finalizarCompra = async (data) => {
-
     const { name, lastname, address, email } = data
     setLoading(true)
 
     const batch = writeBatch(db)
 
     try {
-
       // descontar stock
       cart.forEach((product) => {
 

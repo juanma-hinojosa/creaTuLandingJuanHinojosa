@@ -51,13 +51,13 @@ function App() {
 
               <Route path='*' element={<Error />} />
             </Routes>
-
+            
+            <FooterComponent />
           </SkeletonTheme>
         </CartProvider>
 
       </AuthProvider>
 
-      <FooterComponent />
     </BrowserRouter>
   )
 }

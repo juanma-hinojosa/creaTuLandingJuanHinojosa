@@ -3,215 +3,107 @@ import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "../styles/Auth.css"
+import { useForm } from "react-hook-form";
 
 
 function RegisterPage() {
-  const { register } = useAuth()
+  const { register: registerUser } = useAuth()
   const navigate = useNavigate()
 
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    address: "",
-    addressNum: "",
-    postalCode: "",
-    city: "",
-    provincia: "",
-    telefono: ""
-  });
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
+  const onSubmit = async (data) => {
     try {
-      await register(form)
+      await registerUser(data)
       toast.success('Usuario Registrado')
       navigate('/')
     } catch (error) {
-      console.log(error);
-      
       toast.error(error.message)
     }
   }
 
-  // return (
-  //   <form onSubmit={handleSubmit}>
+  return (
+    <main className="auth-main">
 
-  //     <h2>Registro</h2>
+      <section className="auth-card">
 
-  //     <input
-  //       name="firstName"
-  //       placeholder="Nombre"
-  //       onChange={handleChange}
-  //       required
-  //     />
+        <h2>Crear Cuenta</h2>
 
-  //     <input
-  //       name="lastName"
-  //       placeholder="Apellido"
-  //       onChange={handleChange}
-  //       required
-  //     />
+        <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
 
-  //     <input
-  //       type="email"
-  //       name="email"
-  //       placeholder="Email"
-  //       onChange={handleChange}
-  //       required
-  //     />
+          <input
+            placeholder="Nombre"
+            {...register("firstName", { required: "El nombre es obligatorio" })}
+          />
 
-  //     <input
-  //       type="password"
-  //       name="password"
-  //       placeholder="Contraseña"
-  //       onChange={handleChange}
-  //       required
-  //     />
+          <input
+            placeholder="Apellido"
+            {...register("lastName", { required: "El apellido es obligatorio" })}
+          />
 
-  //     <input
-  //       name="telefono"
-  //       placeholder="Teléfono"
-  //       onChange={handleChange}
-  //     />
+          <input
+            type="email"
+            placeholder="Email"
+            {...register("email", { required: "El email es obligatorio" })}
+          />
 
-  //     <input
-  //       name="address"
-  //       placeholder="Dirección"
-  //       onChange={handleChange}
-  //     />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            {...register("password", {
+              required: "La contraseña es obligatoria",
+              minLength: {
+                value: 6,
+                message: "Mínimo 6 caracteres"
+              }
+            })}
+          />
 
-  //     <input
-  //       name="addressNum"
-  //       placeholder="Número"
-  //       onChange={handleChange}
-  //     />
+          <input
+            placeholder="Teléfono"
+            type="number"
+            {...register("telefono")}
+          />
 
-  //     <input
-  //       name="postalCode"
-  //       placeholder="Código Postal"
-  //       onChange={handleChange}
-  //     />
+          <input
+            placeholder="Dirección"
+            {...register("address")}
+          />
 
-  //     <input
-  //       name="city"
-  //       placeholder="Ciudad"
-  //       onChange={handleChange}
-  //     />
+          <input
+            placeholder="Número"
+            {...register("addressNum")}
+          />
 
-  //     <input
-  //       name="provincia"
-  //       placeholder="Provincia"
-  //       onChange={handleChange}
-  //     />
+          <input
+            placeholder="Código Postal"
+            {...register("postalCode")}
+          />
 
-  //     <button type="submit">
-  //       Crear cuenta
-  //     </button>
+          <input
+            placeholder="Ciudad"
+            {...register("city")}
+          />
 
-  //     <p>
-  //       Ya tienes cuenta <Link to="/login">Login</Link>
-  //     </p>
+          <input
+            placeholder="Provincia"
+            {...register("provincia")}
+          />
 
-  //   </form>
-  // );
+          <button type="submit">
+            Crear cuenta
+          </button>
 
-return (
-  <main className="auth-main">
-    <section className="auth-card">
+          <p>
+            Ya tienes cuenta <Link to="/login">Login</Link>
+          </p>
 
-      <h2>Crear Cuenta</h2>
+        </form>
 
-      <form onSubmit={handleSubmit} className="auth-form">
+      </section>
 
-        <input
-          name="firstName"
-          placeholder="Nombre"
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          name="lastName"
-          placeholder="Apellido"
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          name="telefono"
-          placeholder="Teléfono"
-          onChange={handleChange}
-        />
-
-        <input
-          name="address"
-          placeholder="Dirección"
-          onChange={handleChange}
-        />
-
-        <input
-          name="addressNum"
-          placeholder="Número"
-          onChange={handleChange}
-        />
-
-        <input
-          name="postalCode"
-          placeholder="Código Postal"
-          onChange={handleChange}
-        />
-
-        <input
-          name="city"
-          placeholder="Ciudad"
-          onChange={handleChange}
-        />
-
-        <input
-          name="provincia"
-          placeholder="Provincia"
-          onChange={handleChange}
-        />
-
-        <button type="submit">
-          Crear cuenta
-        </button>
-
-        <p>
-          Ya tienes cuenta <Link to="/login">Login</Link>
-        </p>
-
-      </form>
-
-    </section>
-  </main>
-);
+    </main>
+  );
 }
 
 export default RegisterPage
