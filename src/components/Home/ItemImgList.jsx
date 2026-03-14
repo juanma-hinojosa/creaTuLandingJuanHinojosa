@@ -27,7 +27,7 @@ function ImgList() {
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           navigation
-          pagination={{ clickable: true }}
+          // pagination={{ clickable: true }}
           loop
           spaceBetween={20}
           // slidesPerView={1}
@@ -35,6 +35,9 @@ function ImgList() {
           breakpoints={{
             0: {
               slidesPerView: 1,
+            },
+            581: {
+              slidesPerView: 3,
             },
             781: {
               slidesPerView: 4,

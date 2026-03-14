@@ -4,9 +4,7 @@ import { toast } from "react-toastify"
 import { CartContext } from "../context/CartContext"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
-import { addDoc, collection } from "firebase/firestore"
-import { db } from "../service/firebase"
-import { productos } from "../mock/asyncData"
+// import { Link } from "react-router-dom"
 
 function ItemDetail({ detail }) {
   const [cantidad, setCantidad] = useState(1)
@@ -47,8 +45,9 @@ function ItemDetail({ detail }) {
 
   return (
     <>
-      <figure className="item-detail">
+      
 
+      <figure className="item-detail">
 
         {/* <button onClick={subirProd}>SUBIR DATA</button> */}
 

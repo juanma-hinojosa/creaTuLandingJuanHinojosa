@@ -2,13 +2,15 @@ function CardComponent({img}) {
   return (
     <article
       style={{
-        border: "4px",
+        borderRadius: "10px",
         overflow: 'hidden'
       }}
     >
       <img
         style={{
-          width: "100%"
+          width: "100%",
+          display: "block",
+          borderRadius: "10px"
         }}
         src={img.img} alt="producto linea de clasicos" />
     </article>
