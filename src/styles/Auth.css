@@ -1,0 +1,105 @@
+/* CONTENEDOR GENERAL */
+
+.auth-main {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* CARD */
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid #eee;
+}
+
+/* TITULO */
+
+.auth-card h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+/* FORM */
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+}
+
+/* INPUTS */
+
+.auth-form input {
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: all .2s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+}
+
+/* BOTON */
+
+.auth-form button {
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  background: #3b82f6;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.auth-form button:hover {
+  background: #2563eb;
+}
+
+/* TEXTO */
+
+.auth-form p {
+  text-align: center;
+  font-size: 14px;
+}
+
+.auth-form a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-form a:hover {
+  text-decoration: underline;
+}
+
+/* BOTON GOOGLE */
+
+.google-btn {
+  display: flex;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.google-btn img {
+  width: 220px;
+  transition: transform .2s ease;
+}
+
+.google-btn img:hover {
+  transform: scale(1.05);
+}

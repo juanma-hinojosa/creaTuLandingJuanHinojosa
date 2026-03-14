@@ -34,7 +34,7 @@ nav {
 /* ============================= */
 
 .max-width-container > .topbar > .features-container {
-  width: 500px;
+  width: 600px;
   display: flex;
   justify-content: space-between;
   align-items: center;

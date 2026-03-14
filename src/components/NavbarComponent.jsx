@@ -4,9 +4,13 @@ import CartWidget from "./CartWidgetComponent";
 import "../styles/NavbarComponent.css";
 import Logo from "/cacaushow-logo.png";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import LogoutButton from "./Auth/LogoutButton";
 
 function NavbarComponent() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const { user, profile } = useAuth();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -25,7 +29,20 @@ function NavbarComponent() {
           </NavLink>
 
           <div className="features-container">
-            <a href="#" className="login-button">Entrar</a>
+            {user && profile && (
+              <span  >
+                Hola, {profile.firstName}
+              </span>
+            )}
+
+            {user ? (
+              <LogoutButton />
+            ) : (
+              <NavLink to="/login" className="login-button">
+                Entrar
+              </NavLink>
+            )}
+
             <span>Salvador - BA, 41900-040, Brasil</span>
             <CartWidget />
           </div>

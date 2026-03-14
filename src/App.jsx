@@ -14,37 +14,48 @@ import { SkeletonTheme } from 'react-loading-skeleton'
 import AdminPage from './pages/AdminPage'
 import CheckoutPage from './components/Checkout'
 import SwipperComponent from './components/SwipperComponent'
+import { AuthProvider } from './context/AuthContext'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import CompleteProfilePage from './pages/CompleteProfilePage'
 
 function App() {
   return (
     <BrowserRouter>
 
       {/* Afuera del CartProvider debo agregar el AuthProvider  */}
+      <AuthProvider>
 
-      <CartProvider>
-        <SkeletonTheme baseColor="#d3d3d3" highlightColor="#9b9999">
+        <CartProvider>
+          <SkeletonTheme baseColor="#d3d3d3" highlightColor="#9b9999">
 
-          <ToastContainer position="top-right" autoClose={2000} />
-          <SwipperComponent />
-          <NavbarComponent />
-          <Routes>
-            <Route path='/' element={<HomePage />} />
+            <ToastContainer position="top-right" autoClose={2000} />
+            <SwipperComponent />
+            <NavbarComponent />
+            <Routes>
+              <Route path='/' element={<HomePage />} />
 
-            {/* Prueba para futuro adminpage  */}
-            {/* <Route path='/admin' element={<AdminPage />} /> */}
+              {/* Rutas Pruebas Login y Registro  */}
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/registrarse' element={<RegisterPage />} />
+              <Route path='/complete-profile' element={<CompleteProfilePage />} />
 
-            <Route path='/item/:id' element={<ItemDetailContainer />} />
-            <Route path='/category/:type' element={<ItemListContainer />} />
+              {/* Prueba para futuro adminpage  */}
+              {/* <Route path='/admin' element={<AdminPage />} /> */}
 
-            <Route path='/cart' element={<CartContainer />} />
-            <Route path='/checkout' element={<CheckoutPage />} />
+              <Route path='/item/:id' element={<ItemDetailContainer />} />
+              <Route path='/category/:type' element={<ItemListContainer />} />
 
-            <Route path='*' element={<Error />} />
-          </Routes>
+              <Route path='/cart' element={<CartContainer />} />
+              <Route path='/checkout' element={<CheckoutPage />} />
 
-        </SkeletonTheme>
-      </CartProvider>
+              <Route path='*' element={<Error />} />
+            </Routes>
 
+          </SkeletonTheme>
+        </CartProvider>
+
+      </AuthProvider>
 
       <FooterComponent />
     </BrowserRouter>
