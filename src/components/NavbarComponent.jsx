@@ -39,7 +39,7 @@ function NavbarComponent() {
               <LogoutButton />
             ) : (
               <NavLink to="/login" className="login-button">
-                Entrar
+                Entrar <Icon icon="gg:profile" width="20px" />
               </NavLink>
             )}
 
@@ -59,6 +59,22 @@ function NavbarComponent() {
               )}
             </button>
           </div>
+        </section>
+
+        <section className="bottom-navbar" >
+          {user && profile && (
+            <span  >
+              Hola, {profile.firstName}
+            </span>
+          )}
+
+          {user ? (
+            <LogoutButton />
+          ) : (
+            <NavLink to="/login" className="login-button">
+              Entrar <Icon icon="gg:profile" width='20px' />
+            </NavLink>
+          )}
         </section>
 
         <ul className={`links-container ${menuOpen ? "active" : ""}`}>

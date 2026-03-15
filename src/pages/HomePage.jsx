@@ -15,6 +15,7 @@ import {
   flyersCarruselAvisos,
   listaMomentosDulces
 } from "../mock/asyncDataCarrusel"
+import BannerComponent from "../components/Home/BannerComponent"
 
 function HomePage() {
 
@@ -46,13 +47,11 @@ function HomePage() {
     const loadData = async () => {
 
       try {
-
         const products = await getProducts(category)
         setData(products)
 
         const trufasProducts = await getProducts("trufas")
         setTrufas(trufasProducts)
-
 
         const pascuaProducts = await getProducts("pascua")
         setPascua(pascuaProducts)
@@ -62,11 +61,8 @@ function HomePage() {
       } finally {
         setLoading(false)
       }
-
     }
-
     loadData()
-
   }, [category])
 
   return (
@@ -103,6 +99,8 @@ function HomePage() {
 
 
       <ImageSwiper data={flyersCarruselAvisos} />
+
+      <BannerComponent />
 
     </main>
   )

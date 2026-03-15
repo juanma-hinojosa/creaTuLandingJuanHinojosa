@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import { useAuth } from "../../context/AuthContext";
 
 function LogoutButton() {
@@ -9,7 +10,7 @@ function LogoutButton() {
 
   return (
     <button onClick={handleLogout} className="login-button" style={{border:'none'}} >
-      Cerrar Sesion
+      Salir  <Icon icon="material-symbols:logout" width="15px" />
     </button>
   )
 }
